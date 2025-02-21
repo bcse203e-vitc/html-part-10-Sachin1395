@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canvas Drawing App</title>
+    <style>
+        #canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <br/>
+    <label for="color">Color:</label>
+    <input type="color" id="color">
+    <label for="size">Brush Size:</label>
+    <input type="range" id="size" min="1" max="10" value="1">
+    <button onclick="clearCanvas()">Clear Canvas</button>
+    
+</body>
+<script>
+    var canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
+    var drawing = false;
+    var color = document.getElementById("color").value;
+    var size = document.getElementById("size").value;
+
+    canvas.addEventListener("mousedown", function(e) {
+        drawing = true;
+        ctx.beginPath();
+        ctx.moveTo(e.offsetX, e.offsetY);
+    });
+
+    canvas.addEventListener("mousemove", function(e) {
+        if (drawing) {
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = size;
+            ctx.stroke();
+        }
+    });
+
+    canvas.addEventListener("mouseup", function() {
+        drawing = false;
+    });
+
+    document.getElementById("color").addEventListener("input", function() {
+        color = this.value;
+    });
+
+    document.getElementById("size").addEventListener("input", function() {
+        size = this.value;
+    });
+
+    function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+</script>
+</html>

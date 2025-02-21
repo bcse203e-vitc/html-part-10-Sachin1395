@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layered Image Gallery</title>
+    <style>
+        .image {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            transition: z-index 0.3s;
+        }
+
+        #image1 {
+            z-index: 1;
+        }
+
+        #image2 {
+            z-index: 2;
+            left: 30px;
+            top: 30px;
+        }
+
+        #image3 {
+            z-index: 3;
+            left: 50px;
+            top: 50px;
+        }
+    </style>
+    <script>
+        function bringToFront(imageId) {
+            const images = document.querySelectorAll('.image');
+            images.forEach(img => img.style.zIndex = 1);
+            document.getElementById(imageId).style.zIndex = 4;
+        }
+    </script>
+</head>
+
+<body>
+    <img id="image1"
+        src="https://images.pexels.com/photos/30738579/pexels-photo-30738579/free-photo-of-close-up-of-green-spruce-branch-in-forest.png?auto=compress&cs=tinysrgb&w=600&lazy=load"
+        class="image" onclick="bringToFront('image1')" />
+    <img id="image2"
+        src="https://images.pexels.com/photos/30777373/pexels-photo-30777373/free-photo-of-whimsical-abstract-of-swirling-white-flowers.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        class="image" onclick="bringToFront('image2')" />
+    <img id="image3" src="https://images.pexels.com/photos/30426602/pexels-photo-30426602/free-photo-of-abstract-forest-blur-with-motion-effect.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" class="image"
+        onclick="bringToFront('image3')" />
+</body>
+
+</html>
